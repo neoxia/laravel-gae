@@ -7,12 +7,8 @@ use SplFileInfo;
 
 class GCSAdapter extends LocalAdapter
 {
-    public function __construct(
-        $root,
-        $writeFlags = LOCK_EX,
-        $linkHandling = self::DISALLOW_LINKS,
-        array $permissions = []
-    ) {
+    public function __construct($root, $writeFlags = LOCK_EX, $linkHandling = self::DISALLOW_LINKS, $permissions = [])
+    {
         try {
             parent::__construct($root, null, $linkHandling, $permissions);
         } catch (\LogicException $e) {
