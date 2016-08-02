@@ -1,7 +1,7 @@
 {
-    "name": "neoxia/laravel-csv-response",
+    "name": "neoxia/laravel-gae",
     "license": "MIT",
-    "description": "Add a CSV response type to Laravel",
+    "description": "Google App Engine helpers for Laravel applications",
     "require": {
         "php": ">=5.5.9",
         "illuminate/config": "5.1.*|5.2.*",
