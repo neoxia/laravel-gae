@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/neoxia/laravel-csv-response.svg?branch=master)](https://travis-ci.org/neoxia/laravel-csv-response)
-[![Coverage Status](https://coveralls.io/repos/github/neoxia/laravel-csv-response/badge.svg?branch=master)](https://coveralls.io/github/neoxia/laravel-csv-response?branch=master)
+[![Build Status](https://travis-ci.org/neoxia/laravel-gae.svg?branch=master)](https://travis-ci.org/neoxia/laravel-gae)
+[![Coverage Status](https://coveralls.io/repos/github/neoxia/laravel-gae/badge.svg?branch=master)](https://coveralls.io/github/neoxia/laravel-gae?branch=master)
 
 ## Laravel GAE
 
