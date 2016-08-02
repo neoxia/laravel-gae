@@ -1,0 +1,71 @@
+<?php
+
+namespace Neoxia\GAE\Console;
+
+use Illuminate\Console\Command;
+use Illuminate\Config\Repository as Config;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\View\Engines\CompilerEngine;
+use Illuminate\View\View;
+use ErrorException;
+
+class CompileAppFile extends Command
+{
+    protected $signature = 'gae:compile-app-file';
+    protected $description = 'Set variables in app.yaml file';
+
+    protected $config;
+    protected $files;
+    protected $engine;
+    protected $viewFactory;
+
+    public function __construct(Config $config, Filesystem $files, ViewFactory $viewFactory, CompilerEngine $engine)
+    {
+        parent::__construct();
+
+        $this->config = $config;
+        $this->files = $files;
+        $this->engine = $engine;
+        $this->viewFactory = $viewFactory;
+    }
+
+    public function handle()
+    {
+        $path = base_path() . '/app.yaml';
+
+        if (! $this->files->isFile($path)) {
+            return $this->error('Can\'t find app.yaml file');
+        }
+
+        $view = $this->getView($path, $_SERVER);
+
+        try {
+            $content = $view->render();
+        } catch (ErrorException $e) {
+            return $this->error('Render error: "' . $e->getMessage() . '"');
+        }
+
+        $this->files->put($path, $content);
+
+        return $this->info('app.yaml compiled!');
+    }
+
+    public function getView($path, $data)
+    {
+        return new View($this->viewFactory, $this->engine, $path, $path, $data);
+    }
+}
+
+if (! function_exists('base_path')) {
+    /**
+     * Get the path to the base of the install.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function base_path($path = '')
+    {
+        return getcwd();
+    }
+}
