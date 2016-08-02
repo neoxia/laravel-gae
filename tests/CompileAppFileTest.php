@@ -12,7 +12,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
 
         $this->config = m::mock('Illuminate\Config\Repository');
         $this->viewFactory = m::mock('Illuminate\View\Factory');
-        $this->compiler = m::mock('Illuminate\View\Engines\CompilerEngine');
+        $this->compiler = m::mock('Illuminate\View\Compilers\BladeCompiler');
         $this->files = m::mock('Illuminate\Filesystem\Filesystem');
         $this->view = m::mock('Illuminate\View\View');
 

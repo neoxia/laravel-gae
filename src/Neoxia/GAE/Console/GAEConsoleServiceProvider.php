@@ -14,7 +14,7 @@ class GAEConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app['Neoxia\GAE\Console\CompileAppFile'] = $this->app->share(function ($app) {
-            return new CompileAppFile($app['config'], $app['files'], $app['view'], $app['blade']);
+            return new CompileAppFile($app['config'], $app['files'], $app['view'], $app['blade.compiler']);
         });
 
         $this->commands('Neoxia\GAE\Console\CompileAppFile');

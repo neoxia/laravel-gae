@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\View;
 use ErrorException;
@@ -17,16 +18,16 @@ class CompileAppFile extends Command
 
     protected $config;
     protected $files;
-    protected $engine;
+    protected $compiler;
     protected $viewFactory;
 
-    public function __construct(Config $config, Filesystem $files, ViewFactory $viewFactory, CompilerEngine $engine)
+    public function __construct(Config $config, Filesystem $files, ViewFactory $viewFactory, BladeCompiler $compiler)
     {
         parent::__construct();
 
         $this->config = $config;
         $this->files = $files;
-        $this->engine = $engine;
+        $this->compiler = $compiler;
         $this->viewFactory = $viewFactory;
     }
 
@@ -53,7 +54,9 @@ class CompileAppFile extends Command
 
     public function getView($path, $data)
     {
-        return new View($this->viewFactory, $this->engine, $path, $path, $data);
+        $engine = new CompilerEngine($this->compiler);
+
+        return new View($this->viewFactory, $engine, $path, $path, $data);
     }
 }
 
