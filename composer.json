@@ -20,9 +20,6 @@
     "autoload": {
          "psr-4": {
             "Neoxia\\": "src/Neoxia/"
-        },
-        "files": [
-            "src/Neoxia/Gae/Filesystem/helpers.php"
-        ]
+        }
     }
 }
