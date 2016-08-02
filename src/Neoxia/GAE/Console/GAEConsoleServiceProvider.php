@@ -17,6 +17,11 @@ class GAEConsoleServiceProvider extends ServiceProvider
             return new CompileAppFile($app['config'], $app['files'], $app['view'], $app['blade.compiler']);
         });
 
+        $this->app['Neoxia\GAE\Console\CompileViews'] = $this->app->share(function ($app) {
+            return new CompileViews($app['config'], $app['files'], $app['blade.compiler']);
+        });
+
         $this->commands('Neoxia\GAE\Console\CompileAppFile');
+        $this->commands('Neoxia\GAE\Console\CompileViews');
     }
 }
