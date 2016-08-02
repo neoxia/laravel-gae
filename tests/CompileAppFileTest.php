@@ -1,12 +1,10 @@
 <?php
 
-use Neoxia\GAE\Console\CompileAppFile;
-use Illuminate\Support\Collection;
 use Mockery as m;
 
 class CompileAppFileTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
