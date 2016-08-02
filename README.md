@@ -26,4 +26,5 @@ And add the service providers in `config/app.php`.
 ```PHP
 Neoxia\GAE\Console\GAEConsoleServiceProvider::class,
 Neoxia\GAE\Filesystem\GAEFilesystemServiceProvider::class,
+Neoxia\GAE\Migrations\GAEMigrationsServiceProvider::class,
 ```
