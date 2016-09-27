@@ -47,7 +47,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->command->handle();
     }
 
-    public function testTryToCompilerAppFileIfFileDoesntExist()
+    public function testCompileAppFileWithNonExistingFile()
     {
         $this->files->shouldReceive('isFile')->with('/.*app.yaml/')->andReturn(false);
         $this->command->shouldReceive('error')->with('Can\'t find app.yaml file');
@@ -55,7 +55,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->command->handle();
     }
 
-    public function testTryToCompilerAppFileIfErrorDuringRender()
+    public function testCompileAppFileWithRenderError()
     {
         $this->files->shouldReceive('isFile')->with('/.*app.yaml/')->andReturn(true);
         $this->view->shouldReceive('render')->andThrow('ErrorException', 'Undefined variable: DB_PASSWORD');
