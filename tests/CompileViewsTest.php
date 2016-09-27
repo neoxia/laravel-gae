@@ -5,6 +5,21 @@ use Mockery as m;
 
 class CompileViewsTest extends PHPUnit_Framework_TestCase
 {
+    /** @var m\Mock|\Neoxia\GAE\Console\CompileAppFile */
+    private $command;
+
+    /** @var m\Mock|\Illuminate\Config\Repository */
+    private $config;
+
+    /** @var m\Mock|\Illuminate\View\Compilers\BladeCompiler */
+    private $compiler;
+
+    /** @var m\Mock|\Illuminate\Filesystem\Filesystem */
+    private $files;
+
+    /** @var m\Mock|SplFileInfo */
+    private $viewFile;
+
     protected function setUp()
     {
         parent::setUp();
