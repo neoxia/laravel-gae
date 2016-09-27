@@ -14,7 +14,7 @@
         "league/flysystem": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.8.*",
+        "phpunit/phpunit": "5.*",
         "mockery/mockery": "0.9.*",
         "satooshi/php-coveralls": "^1.0"
     },
