@@ -33,13 +33,15 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->view = m::mock(Illuminate\View\View::class);
 
         $inject = [$this->config, $this->files, $this->viewFactory, $this->compiler];
-        $this->command = m::mock(Neoxia\GAE\Console\CompileAppFile::class . '[getView,info,error]', $inject);
+        $this->command = m::mock(Neoxia\GAE\Console\CompileAppFile::class . '[getView,info,error,argument]', $inject);
         $this->command->shouldReceive('getView')->andReturn($this->view);
     }
 
-    public function testCompileAppFile()
+    public function testCompileAppFileWithDefaultArgs()
     {
-        $this->files->shouldReceive('isFile')->with('/.*app.yaml/')->andReturn(true);
+        $this->command->shouldReceive('argument')->with('src')->andReturn('app.yaml');
+        $this->command->shouldReceive('argument')->with('dest')->andReturn('app.yaml');
+        $this->files->shouldReceive('isFile')->with('/app.yaml$/')->andReturn(true);
         $this->view->shouldReceive('render')->andReturn('Config data');
         $this->files->shouldReceive('put')->with('/.*app.yaml/', 'Config data');
         $this->command->shouldReceive('info')->with('app.yaml compiled!');
@@ -47,8 +49,21 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->command->handle();
     }
 
+    public function testCompileAppFileWithCustomFileSourceAndCustomDest()
+    {
+        $this->command->shouldReceive('argument')->with('src')->andReturn('app.blade.yaml');
+        $this->command->shouldReceive('argument')->with('dest')->andReturn('app.yaml');
+        $this->files->shouldReceive('isFile')->with('/app.blade.yaml$/')->andReturn('Config data');
+        $this->view->shouldReceive('render')->andReturn('Config data');
+        $this->files->shouldReceive('put')->with('/app.yaml$/', 'Config data');
+        $this->command->shouldReceive('info')->with('app.yaml compiled!');
+
+        $this->command->handle();
+    }
+
     public function testCompileAppFileWithNonExistingFile()
     {
+        $this->command->shouldReceive('argument')->with('src')->andReturn('app.yaml');
         $this->files->shouldReceive('isFile')->with('/.*app.yaml/')->andReturn(false);
         $this->command->shouldReceive('error')->with('Can\'t find app.yaml file');
 
@@ -57,6 +72,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
 
     public function testCompileAppFileWithRenderError()
     {
+        $this->command->shouldReceive('argument')->with('src')->andReturn('app.yaml');
         $this->files->shouldReceive('isFile')->with('/.*app.yaml/')->andReturn(true);
         $this->view->shouldReceive('render')->andThrow('ErrorException', 'Undefined variable: DB_PASSWORD');
         $this->command->shouldReceive('error')->with('Render error: "Undefined variable: DB_PASSWORD"');

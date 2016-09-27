@@ -13,7 +13,7 @@ use ErrorException;
 
 class CompileAppFile extends Command
 {
-    protected $signature = 'gae:compile-app-file';
+    protected $signature = 'gae:compile-app-file {src=app.yaml} {dest=app.yaml}';
     protected $description = 'Set variables in app.yaml file';
 
     protected $config;
@@ -33,13 +33,13 @@ class CompileAppFile extends Command
 
     public function handle()
     {
-        $path = base_path() . '/app.yaml';
+        $src = base_path() . $this->argument('src');
 
-        if (! $this->files->isFile($path)) {
+        if (! $this->files->isFile($src)) {
             return $this->error('Can\'t find app.yaml file');
         }
 
-        $view = $this->getView($path, $_SERVER);
+        $view = $this->getView($src, $_SERVER);
 
         try {
             $content = $view->render();
@@ -47,7 +47,7 @@ class CompileAppFile extends Command
             return $this->error('Render error: "' . $e->getMessage() . '"');
         }
 
-        $this->files->put($path, $content);
+        $this->files->put($this->argument('dest'), $content);
 
         return $this->info('app.yaml compiled!');
     }
