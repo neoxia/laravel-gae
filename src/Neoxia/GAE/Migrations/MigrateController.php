@@ -3,7 +3,6 @@
 namespace Neoxia\GAE\Migrations;
 
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ use Illuminate\Config\Repository as Config;
 
 class MigrateController extends BaseController
 {
-    public function post(Migrator $migrator, DatabaseManager $databaseManager, Request $request, Config $config)
+    public function post(Application $application, DatabaseManager $databaseManager, Request $request, Config $config)
     {
         if ($request->input('token') !== $config->get('app.admin_token')) {
             return response('Unauthorized', 401);
@@ -20,6 +19,7 @@ class MigrateController extends BaseController
         $this->confirmDatabaseExistence($databaseManager, $config);
         $result = 'Database existence confirmed.';
 
+        $migrator = $application['migrator'];
         if (! $migrator->repositoryExists()) {
             $migrator->getRepository()->createRepository();
             $result .= "Migration table created successfully.\n";
