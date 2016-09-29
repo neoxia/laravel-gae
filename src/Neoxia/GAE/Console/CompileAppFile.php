@@ -58,6 +58,13 @@ class CompileAppFile extends Command
         return $this->info('app.yaml compiled!');
     }
 
+    public function error($message, $verbosity = null)
+    {
+        parent::error($message);
+
+        return 1;
+    }
+
     private function getEnv()
     {
         $env = $_SERVER;
