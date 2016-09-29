@@ -14,7 +14,7 @@ use Illuminate\View\View;
 
 class CompileAppFile extends Command
 {
-    protected $signature = 'gae:compile-app-file {src=app.yaml} {dest=app.yaml} {target=master}';
+    protected $signature = 'gae:compile-app-file {--src=app.yaml} {--dest=app.yaml} {--target=master}';
 
     protected $description = 'Set variables in app.yaml file';
 
@@ -38,7 +38,7 @@ class CompileAppFile extends Command
 
     public function handle()
     {
-        $src = base_path() . $this->argument('src');
+        $src = base_path() . $this->option('src');
 
         if (! $this->files->isFile($src)) {
             return $this->error('Can\'t find app.yaml file');
@@ -53,7 +53,7 @@ class CompileAppFile extends Command
             return $this->error('Render error: "' . $e->getMessage() . '"');
         }
 
-        $this->files->put($this->argument('dest'), $content);
+        $this->files->put($this->option('dest'), $content);
 
         return $this->info('app.yaml compiled!');
     }
@@ -61,7 +61,7 @@ class CompileAppFile extends Command
     private function getEnv()
     {
         $env = $_SERVER;
-        $target = Str::upper($this->argument('target'));
+        $target = Str::upper($this->option('target'));
 
         foreach ($env as $key => $value) {
             if (! Str::contains($key, '__')) {
