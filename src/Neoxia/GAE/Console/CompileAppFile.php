@@ -38,7 +38,7 @@ class CompileAppFile extends Command
 
     public function handle()
     {
-        $src = base_path() . $this->option('src');
+        $src = base_path() . '/' . trim($this->option('src'), '/');
 
         if (! $this->files->isFile($src)) {
             return $this->error('Can\'t find app.yaml file');
@@ -53,7 +53,7 @@ class CompileAppFile extends Command
             return $this->error('Render error: "' . $e->getMessage() . '"');
         }
 
-        $this->files->put($this->option('dest'), $content);
+        $this->files->put(base_path() . '/' . trim($this->option('dest'), '/'), $content);
 
         return $this->info('app.yaml compiled!');
     }
