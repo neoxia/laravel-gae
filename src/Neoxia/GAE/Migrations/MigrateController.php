@@ -16,10 +16,14 @@ class MigrateController extends BaseController
             return response('Unauthorized', 401);
         }
 
-        $this->confirmDatabaseExistence($databaseManager, $config);
-        $result = 'Database existence confirmed.';
-
         $migrator = $application['migrator'];
+        $connection = $config->get('database.default');
+
+        $migrator->setConnection($connection);
+        $this->confirmDatabaseExistence($databaseManager, $config, $connection);
+
+        $result = "Database existence confirmed.\n";
+
         if (! $migrator->repositoryExists()) {
             $migrator->getRepository()->createRepository();
             $result .= "Migration table created successfully.\n";
@@ -31,16 +35,15 @@ class MigrateController extends BaseController
         return response($result, 200);
     }
 
-    protected function confirmDatabaseExistence(DatabaseManager $databaseManager, Config $config)
+    protected function confirmDatabaseExistence(DatabaseManager $databaseManager, Config $config, $default)
     {
-        $default = $config->get('database.default');
-        $database = $config->get('database.' . $default . '.database');
-        $config->set('database.' . $default . '.database', null);
+        $database = $config->get('database.connections.' . $default . '.database');
+        $config->set('database.connections.' . $default . '.database', null);
         $databaseManager->purge();
         $connection = $databaseManager->connection($default);
-        $connection->statement("CREATE SCHEMA IF NOT EXISTS $database CHARSET utf8");
+        $connection->statement("CREATE SCHEMA IF NOT EXISTS $database CHARSET 'utf8'");
         $databaseManager->purge();
-        $config->set('database.' . $default . '.database', $database);
+        $config->set('database.connections.' . $default . '.database', $database);
     }
 }
 
