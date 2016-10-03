@@ -16,14 +16,13 @@ class MigrateController extends BaseController
             return response('Unauthorized', 401);
         }
 
-        $migrator = $application['migrator'];
         $connection = $config->get('database.default');
-
-        $migrator->setConnection($connection);
         $this->confirmDatabaseExistence($databaseManager, $config, $connection);
 
         $result = "Database existence confirmed.\n";
 
+        $migrator = $application['migrator'];
+        $migrator->setConnection($connection);
         if (! $migrator->repositoryExists()) {
             $migrator->getRepository()->createRepository();
             $result .= "Migration table created successfully.\n";
@@ -39,10 +38,10 @@ class MigrateController extends BaseController
     {
         $database = $config->get('database.connections.' . $default . '.database');
         $config->set('database.connections.' . $default . '.database', null);
-        $databaseManager->purge();
+        $databaseManager->purge($default);
         $connection = $databaseManager->connection($default);
         $connection->statement("CREATE SCHEMA IF NOT EXISTS $database CHARSET 'utf8'");
-        $databaseManager->purge();
+        $databaseManager->purge($default);
         $config->set('database.connections.' . $default . '.database', $database);
     }
 }
