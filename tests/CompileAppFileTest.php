@@ -90,7 +90,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
     {
         $this->command->shouldReceive('option')->with('src')->andReturn('app.yaml');
         $this->files->shouldReceive('isFile')->with('/.*app.yaml/')->andReturn(false);
-        $this->command->shouldReceive('error')->with('Can\'t find app.yaml file');
+        $this->command->shouldReceive('error')->with('Cannot find app.yaml file.');
 
         $this->command->handle();
     }
