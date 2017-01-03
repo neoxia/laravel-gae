@@ -11,7 +11,7 @@ use RecursiveIteratorIterator;
 
 class CompileViews extends Command
 {
-    protected $signature = 'gae:compile-views {--keep-views}';
+    protected $signature = 'gae:compile-views {--keep-files}';
     protected $description = 'Compile all the blade templates';
 
     protected $config;
