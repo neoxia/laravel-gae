@@ -11,7 +11,7 @@ use RecursiveIteratorIterator;
 
 class CompileViews extends Command
 {
-    protected $signature = 'gae:compile-views';
+    protected $signature = 'gae:compile-views {--keep-views}';
     protected $description = 'Compile all the blade templates';
 
     protected $config;
@@ -37,8 +37,13 @@ class CompileViews extends Command
             $content = $this->files->get($path);
             $contentCompiled = $this->compiler->compileString($content);
 
-            $this->files->put($path, $contentCompiled);
-            $this->files->move($path, str_replace('.blade', '', $path));
+            $target = str_replace('.blade', '', $path);
+            if ($this->option('keep-files')) {
+                $this->files->put($target, $contentCompiled);
+            } else {
+                $this->files->put($path, $contentCompiled);
+                $this->files->move($path, $target);
+            }
         }
 
         $this->info('Blade templates compiled!');
