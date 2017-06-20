@@ -47,3 +47,15 @@ It will also create the database if it doesn't exist. You can call this routes b
 ```BASH
 curl --data "token=YOUR_TOKEN" https://[VERSION-dot-][SERVICE-dot-]PROJECT_ID.appspot.com/migrate
 ```
+
+## Service account key management encryption
+
+To encrypt your google service account key, type the following command
+```
+openssl aes-256-cbc -e -a -in SERVICE_ACCOUNT_KEY.json -out SERVICE_ACCOUNT_KEY.json.enc -k RANDOM_PASSPHRASE_USED_TO_DECRYPT
+```
+
+To decrypt your google service account key, type the following command
+```
+openssl aes-256-cbc -d -a -in SERVICE_ACCOUNT_KEY.json.enc -out SERVICE_ACCOUNT_KEY.json -k RANDOM_PASSPHRASE_USED_TO_DECRYPT
+```
