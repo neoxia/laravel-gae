@@ -8,7 +8,7 @@ It helps building the application and connects to Google Cloud Storage.
 
 ## Installation
 
-In order to install this package, you have to add `neoxia/laravel-csv-response` in your `composer.json`.
+In order to install this package, you have to add `neoxia/laravel-gae` in your `composer.json`.
 
 ```JSON
 "repositories": [
