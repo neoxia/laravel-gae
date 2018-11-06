@@ -4,14 +4,14 @@
     "description": "Google App Engine helpers for Laravel applications",
     "require": {
         "php": ">=5.5.9",
-        "illuminate/config": "5.1.*|5.2.*",
-        "illuminate/console": "5.1.*|5.2.*",
-        "illuminate/contracts": "5.1.*|5.2.*",
-        "illuminate/database": "5.1.*|5.2.*",
-        "illuminate/filesystem": "5.1.*|5.2.*",
-        "illuminate/http": "5.1.*|5.2.*",
-        "illuminate/support": "5.1.*|5.2.*",
-        "illuminate/view": "5.1.*|5.2.*",
+        "illuminate/config": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/console": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/database": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/filesystem": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/http": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
         "league/flysystem": "~1.0"
     },
     "require-dev": {
