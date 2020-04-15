@@ -59,3 +59,10 @@ To decrypt your google service account key, type the following command
 ```
 openssl aes-256-cbc -d -a -in SERVICE_ACCOUNT_KEY.json.enc -out SERVICE_ACCOUNT_KEY.json -k RANDOM_PASSPHRASE_USED_TO_DECRYPT
 ```
+
+## Contributing
+
+To lauch test in local environnement:
+```
+docker run --volume $PWD:/app composer install --ignore-platform-reqs && ./vendor/bin/phpunit
+```

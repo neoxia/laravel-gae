@@ -1,8 +1,9 @@
 <?php
 
 use Mockery as m;
+use \PHPUnit\Framework\TestCase;
 
-class CompileAppFileTest extends PHPUnit_Framework_TestCase
+class CompileAppFileTest extends TestCase
 {
     /** @var m\Mock|\Neoxia\GAE\Console\CompileAppFile */
     private $command;
@@ -46,6 +47,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->view->shouldReceive('render')->andReturn('Config data');
         $this->files->shouldReceive('put')->with('/.*app.yaml/', 'Config data');
         $this->command->shouldReceive('info')->with('app.yaml compiled!');
+        $this->command->shouldNotReceive('error')->with('Cannot find app.yaml file.');
 
         $this->command->handle();
     }
@@ -58,6 +60,7 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->view->shouldReceive('render')->andReturn('Config data');
         $this->files->shouldReceive('put')->with('/app.yaml$/', 'Config data');
         $this->command->shouldReceive('info')->with('app.yaml compiled!');
+        $this->command->shouldNotReceive('error')->with('Cannot find app.blade.yaml file.');
 
         $this->command->handle();
     }
@@ -82,6 +85,8 @@ class CompileAppFileTest extends PHPUnit_Framework_TestCase
         $this->view->shouldReceive('render');
         $this->files->shouldReceive('put');
         $this->command->shouldReceive('info')->with('app.yaml compiled!');
+        $this->command->shouldNotReceive('error')->with('Cannot find app.blade.yaml file.');
+
 
         $this->command->handle();
     }

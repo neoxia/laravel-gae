@@ -6,8 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Config\Repository as Config;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\Filesystem\Filesystem;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 
 class CompileViews extends Command
 {

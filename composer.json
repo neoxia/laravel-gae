@@ -3,21 +3,21 @@
     "license": "MIT",
     "description": "Google App Engine helpers for Laravel applications",
     "require": {
-        "php": ">=5.5.9",
-        "illuminate/config": "5.1.*|5.2.*|5.3.*",
-        "illuminate/console": "5.1.*|5.2.*|5.3.*",
-        "illuminate/contracts": "5.1.*|5.2.*|5.3.*",
-        "illuminate/database": "5.1.*|5.2.*|5.3.*",
-        "illuminate/filesystem": "5.1.*|5.2.*|5.3.*",
-        "illuminate/http": "5.1.*|5.2.*|5.3.*",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*",
-        "illuminate/view": "5.1.*|5.2.*|5.3.*",
+        "php": ">=7.2.5",
+        "illuminate/config": "^7.0",
+        "illuminate/console": "^7.0",
+        "illuminate/contracts": "^7.0",
+        "illuminate/database": "^7.0",
+        "illuminate/filesystem": "^7.0",
+        "illuminate/http": "^7.0",
+        "illuminate/support": "^7.0",
+        "illuminate/view": "^7.0",
         "league/flysystem": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.5.*",
+        "phpunit/phpunit": "^6.0",
         "mockery/mockery": "0.9.*",
-        "satooshi/php-coveralls": "^1.0"
+        "satooshi/php-coveralls": "^2.2"
     },
     "autoload": {
          "psr-4": {

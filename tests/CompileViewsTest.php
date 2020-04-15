@@ -2,8 +2,9 @@
 
 use Neoxia\GAE\Console\CompileViews;
 use Mockery as m;
+use \PHPUnit\Framework\TestCase;
 
-class CompileViewsTest extends PHPUnit_Framework_TestCase
+class CompileViewsTest extends TestCase
 {
     /** @var m\Mock|\Neoxia\GAE\Console\CompileAppFile */
     private $command;
