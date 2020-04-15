@@ -4,14 +4,14 @@
     "description": "Google App Engine helpers for Laravel applications",
     "require": {
         "php": ">=7.2.5",
-        "illuminate/config": "^7.0",
-        "illuminate/console": "^7.0",
-        "illuminate/contracts": "^7.0",
-        "illuminate/database": "^7.0",
-        "illuminate/filesystem": "^7.0",
-        "illuminate/http": "^7.0",
-        "illuminate/support": "^7.0",
-        "illuminate/view": "^7.0",
+        "illuminate/config": "^7.0|^6.0|^5.5",
+        "illuminate/console": "^7.0|^6.0|^5.5",
+        "illuminate/contracts": "^7.0|^6.0|^5.5",
+        "illuminate/database": "^7.0|^6.0|^5.5",
+        "illuminate/filesystem": "^7.0|^6.0|^5.5",
+        "illuminate/http": "^7.0|^6.0|^5.5",
+        "illuminate/support": "^7.0|^6.0|^5.5",
+        "illuminate/view": "^7.0|^6.0|^5.5",
         "league/flysystem": "~1.0"
     },
     "require-dev": {
